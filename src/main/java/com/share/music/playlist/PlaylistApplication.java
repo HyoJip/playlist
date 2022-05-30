@@ -10,6 +10,8 @@ public class PlaylistApplication {
 		SpringApplication.run(PlaylistApplication.class, args);
 		//test
 		// test2
+		// test 3
+
 	}
 
 }

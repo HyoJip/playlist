@@ -11,7 +11,13 @@ public class PlaylistApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PlaylistApplication.class, args);
 
+
 		System.out.println("jiyani = 브랜치 테스트 해본댜");
+
+		//test
+		// test2
+		// test 3
+    //해결용
 
 	}
 

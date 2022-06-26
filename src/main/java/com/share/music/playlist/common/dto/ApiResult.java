@@ -1,4 +1,4 @@
-package com.share.music.playlist.common;
+package com.share.music.playlist.common.dto;
 
 import lombok.Getter;
 import org.apache.commons.lang3.builder.ToStringBuilder;

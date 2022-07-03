@@ -1,5 +1,6 @@
 package com.share.music.playlist.room.service;
 
+import com.share.music.playlist.error.NotFoundException;
 import com.share.music.playlist.room.domain.Room;
 import com.share.music.playlist.room.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class RoomService {
 
   private final RoomRepository roomRepository;
+
+  @Transactional
+  public Room find(Long id) {
+    return roomRepository.findById(id).orElseThrow(() -> new NotFoundException(Room.class, id));
+  }
 
   @Transactional
   public Page<Room> findAll(Pageable pageable) {

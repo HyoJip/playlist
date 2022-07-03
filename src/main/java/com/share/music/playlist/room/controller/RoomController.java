@@ -18,15 +18,15 @@ public class RoomController {
   private final RoomService roomService;
 
   @GetMapping("/{id:\\d+}")
-  public ApiResult<RoomDto> findRoom(@PathVariable Long id) {
+  public ApiResult<RoomDTO> findRoom(@PathVariable Long id) {
     return ApiResult.ok(
-      RoomDto.of(roomService.find(id))
+      RoomDTO.of(roomService.find(id))
     );
   }
   @GetMapping
-  public ApiResult<Page<RoomDto>> findAllRooms(Pageable pageable) {
+  public ApiResult<Page<RoomDTO>> findAllRooms(Pageable pageable) {
     return ApiResult.ok(
-      roomService.findAll(pageable).map(RoomDto::of)
+      roomService.findAll(pageable).map(RoomDTO::of)
     );
   }
 }

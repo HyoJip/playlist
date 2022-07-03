@@ -2,7 +2,6 @@ package com.share.music.playlist.room.controller;
 
 import com.share.music.playlist.TestPage;
 import com.share.music.playlist.common.dto.ApiResult;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +28,10 @@ class RoomIntegrationTest {
   @Test
   @DisplayName("[방 조회] DB에 방목록이 없을 때, 총 건수는 0이다.")
   void findAllRooms_whenRoomIsEmptyInDB_totalElementsIsZero() {
-    ResponseEntity<ApiResult<TestPage<RoomDto>>> responseEntity = getRooms(new ParameterizedTypeReference<>(){});
+    ResponseEntity<ApiResult<TestPage<RoomDTO>>> responseEntity = getRooms(new ParameterizedTypeReference<>(){});
 
     HttpStatus httpStatus = responseEntity.getStatusCode();
-    ApiResult<TestPage<RoomDto>> apiResult = responseEntity.getBody();
+    ApiResult<TestPage<RoomDTO>> apiResult = responseEntity.getBody();
 
     assertThat(httpStatus).isEqualTo(HttpStatus.OK);
     assertThat(apiResult.isSuccess()).isTrue();

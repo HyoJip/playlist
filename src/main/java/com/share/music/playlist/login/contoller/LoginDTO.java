@@ -1,4 +1,4 @@
-package com.share.music.playlist.login;
+package com.share.music.playlist.login.contoller;
 
 public class LoginDTO {
 

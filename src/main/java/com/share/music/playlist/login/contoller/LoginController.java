@@ -1,4 +1,4 @@
-package com.share.music.playlist.login;
+package com.share.music.playlist.login.contoller;
 
 import org.springframework.web.bind.annotation.*;
 

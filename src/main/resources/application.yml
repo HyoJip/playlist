@@ -38,3 +38,7 @@ logging:
 
 
 
+jwt:
+  server:
+    port: 8080
+  secret: jwtsecretkey

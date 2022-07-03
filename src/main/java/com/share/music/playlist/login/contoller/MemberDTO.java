@@ -1,4 +1,4 @@
-package com.share.music.playlist.login;
+package com.share.music.playlist.login.contoller;
 
 public class MemberDTO {
     private String userId;
@@ -7,6 +7,8 @@ public class MemberDTO {
     private String nickNm;
     private String phoneno;
     private String userPw;
+
+    private String roles;
 
     public String getUserId() {
         return userId;
@@ -55,4 +57,15 @@ public class MemberDTO {
     public void setUserPw(String userPw) {
         this.userPw = userPw;
     }
+
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 }
+
+

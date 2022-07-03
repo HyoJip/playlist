@@ -1,4 +1,8 @@
 spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    cache-duration: PT1H
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://playlist.cnlhntnhndr9.us-west-2.rds.amazonaws.com:3306/playList?serverTimezone=Asia/Seoul

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,10 +17,16 @@ public class RoomController {
 
   private final RoomService roomService;
 
-  @GetMapping
-  public ApiResult<Page<RoomDto>> findAllRooms(Pageable pageable) {
+  @GetMapping("/{id:\\d+}")
+  public ApiResult<RoomDTO> findRoom(@PathVariable Long id) {
     return ApiResult.ok(
-      roomService.findAll(pageable).map(RoomDto::of)
+      RoomDTO.of(roomService.find(id))
+    );
+  }
+  @GetMapping
+  public ApiResult<Page<RoomDTO>> findAllRooms(Pageable pageable) {
+    return ApiResult.ok(
+      roomService.findAll(pageable).map(RoomDTO::of)
     );
   }
 }

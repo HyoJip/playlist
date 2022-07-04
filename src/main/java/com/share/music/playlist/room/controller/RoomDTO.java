@@ -5,20 +5,20 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class RoomDto {
+public class RoomDTO {
 
   private final Long id;
 
   private String name;
 
   @Builder
-  private RoomDto(Long id, String name) {
+  private RoomDTO(Long id, String name) {
     this.id = id;
     this.name = name;
   }
 
-  public static RoomDto of(Room room) {
-    return RoomDto.builder()
+  public static RoomDTO of(Room room) {
+    return RoomDTO.builder()
       .id(room.getId())
       .name(room.getName())
       .build();

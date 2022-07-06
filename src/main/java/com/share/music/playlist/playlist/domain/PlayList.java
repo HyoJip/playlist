@@ -4,20 +4,20 @@ import com.share.music.playlist.music.domain.Music;
 import com.share.music.playlist.room.domain.Room;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class PlayList {
-    @Id
-    private Long roomId;
-    @Id
-    private Long musicId;
+@IdClass(PlayListId.class)
+public class PlayList implements Serializable {
 
+    @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ROOM_ID")
+    @JoinColumn(name="roomId")
     private Room room;
 
+    @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="MUSIC_ID")
+    @JoinColumn(name="musicId")
     private Music music;
 
 }

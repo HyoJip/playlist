@@ -2,6 +2,7 @@ package com.share.music.playlist.music.service;
 
 import com.share.music.playlist.music.domain.Music;
 import com.share.music.playlist.music.repository.MusicRepository;
+import com.share.music.playlist.room.domain.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

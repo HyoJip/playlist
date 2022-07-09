@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: playlist
+    version: 1.0
   messages:
     basename: i18n/messages
     encoding: UTF-8
@@ -8,19 +11,17 @@ spring:
     url: jdbc:mysql://playlist.cnlhntnhndr9.us-west-2.rds.amazonaws.com:3306/playList?serverTimezone=Asia/Seoul
     username: jiyani
     password: 1q2w3e4r!
-
-
-jpa:
-  open-in-view: false
-  hibernate:
-    ddl-auto: update
-    naming:
-      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    use-new-id-generator-mappings: false
-  show-sql: true
-  properties:
-    #hibernate.enable_lazy_load_no_trans: true
-    hibernate.format_sql: true #쿼리를 가독성 있게 보여줌
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+    show-sql: true
+    properties:
+      #hibernate.enable_lazy_load_no_trans: true
+      hibernate.format_sql: true #쿼리를 가독성 있게 보여줌
 
 
 http:

@@ -11,13 +11,11 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
 class RoomIntegrationTest {
 
   static final String ROOM_URL = "/api/rooms";
@@ -28,7 +26,8 @@ class RoomIntegrationTest {
   @Test
   @DisplayName("[방 조회] DB에 방목록이 없을 때, 총 건수는 0이다.")
   void findAllRooms_whenRoomIsEmptyInDB_totalElementsIsZero() {
-    ResponseEntity<ApiResult<TestPage<RoomDTO>>> responseEntity = getRooms(new ParameterizedTypeReference<>(){});
+    ResponseEntity<ApiResult<TestPage<RoomDTO>>> responseEntity = getRooms(new ParameterizedTypeReference<>() {
+    });
 
     HttpStatus httpStatus = responseEntity.getStatusCode();
     ApiResult<TestPage<RoomDTO>> apiResult = responseEntity.getBody();

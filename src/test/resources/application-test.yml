@@ -13,3 +13,6 @@ jpa:
   hibernate:
     ddl-auto: create
     dialect: org.hibernate.dialect.H2Dialect
+  properties:
+    hibernate:
+      format_sql: true

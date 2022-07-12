@@ -9,18 +9,18 @@ public class RoomDTO {
 
   private final Long id;
 
-  private String name;
+  private String title;
 
   @Builder
-  private RoomDTO(Long id, String name) {
+  private RoomDTO(Long id, String title) {
     this.id = id;
-    this.name = name;
+    this.title = title;
   }
 
   public static RoomDTO of(Room room) {
     return RoomDTO.builder()
       .id(room.getId())
-      .name(room.getName())
+      .title(room.getTitle())
       .build();
   }
 }

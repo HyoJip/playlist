@@ -1,0 +1,7 @@
+${AnsiBackground.BRIGHT_MAGENTA}${AnsiColor.BRIGHT_WHITE}   ___    __    _   _  __   __   __    ___ _____
+${AnsiBackground.BRIGHT_CYAN}${AnsiColor.BRIGHT_WHITE}  / o |  / /  .' \ | |/,'  / /  / /  ,' _//_  _/
+${AnsiBackground.BRIGHT_YELLOW}${AnsiColor.BRIGHT_WHITE} / _,'  / /_ / o / | ,'   / /_ / /  _\ `.  / /
+${AnsiBackground.BRIGHT_GREEN}${AnsiColor.BRIGHT_WHITE}/_/    /___//_n_/ /_/    /___//_/  /___,' /_/
+${AnsiBackground.DEFAULT}${spring.application.name} ${spring.application.version}
+${AnsiColor.DEFAULT}Powered by Spring Boot ${spring-boot.version}
+${AnsiStyle.BOLD}${AnsiColor.BRIGHT_GREEN}Contributors bbbic & BAEKJOONKIM & Yani & Hyunji Go${AnsiColor.DEFAULT}

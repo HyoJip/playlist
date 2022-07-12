@@ -1,6 +1,9 @@
 package com.share.music.playlist.common.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.http.HttpStatus;
@@ -12,7 +15,12 @@ public class ApiResult<T> {
   private final T response;
   private final ApiError error;
 
-  private ApiResult(boolean success, T response, ApiError error) {
+  @JsonCreator
+  private ApiResult(
+    @JsonProperty("success") boolean success,
+    @JsonProperty("response") T response,
+    @JsonProperty("error") ApiError error)
+  {
     this.success = success;
     this.response = response;
     this.error = error;

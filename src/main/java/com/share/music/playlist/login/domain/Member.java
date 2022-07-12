@@ -1,19 +1,85 @@
 package com.share.music.playlist.login.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.*;
+import org.hibernate.query.Query;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+@Builder
+@Data
 @Entity
-public class Member {
+@Table(name = "USER")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Member implements UserDetails {
 
     @Id
     @GeneratedValue
+    @Column(name = "USER_ID")
     private String userId;
 
+    @Column(name = "LOGIN_ID")
     private String loginId;
+
+    @Column(name = "USER_NM")
     private String userNm;
+
+    @Column(name = "NICK_NM")
     private String nickNm;
+
+    @Column(name = "PHONE_NO")
     private String phoneno;
-    private String userPw;
+
+    @Column(name = "LOGIN_PW")
+    private String loginPw;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return userNm;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

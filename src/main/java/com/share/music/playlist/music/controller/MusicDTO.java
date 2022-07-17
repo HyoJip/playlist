@@ -5,19 +5,19 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class MusicDto {
+public class MusicDTO {
 
     private final Long id;
     private String name;
 
     @Builder
-    private MusicDto(Long id, String name) {
+    private MusicDTO(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public static MusicDto of(Music music) {
-        return MusicDto.builder()
+    public static MusicDTO of(Music music) {
+        return MusicDTO.builder()
                 .id(music.getId())
                 .name(music.getName())
                 .build();

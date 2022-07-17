@@ -1,5 +1,6 @@
 package com.share.music.playlist.login.contoller;
 
+/* 로그인 때 사용 */
 public class LoginDTO {
 
     private String userId;

@@ -43,7 +43,7 @@ public class LoginController {
      * @param
      * @return member.getUsername(), member.getRoles()
      */
-    @PostMapping("/mainLogin")
+    @PostMapping
    // public ApiResult<MemberDTO> mainLogin(@RequestBody LoginDTO loginDTO){
     public String mainLogin(@RequestBody Map<String, String> user){
 
@@ -64,15 +64,15 @@ public class LoginController {
     }
 
     /**
-     *회원가입
+     *회원가입 페이지로 이동
      *
      */
     @PostMapping("/join")
     public String join(){
         log.info("로그인 시도됨");
-        loginRepository.save(member);
+        //loginRepository.save(member);
 
-        return member.toString();
+        return "/";
     }
 
 

@@ -1,14 +1,42 @@
 package com.share.music.playlist.login.contoller;
 
+import com.share.music.playlist.login.domain.Member;
+
+import java.util.Collections;
+
+/* 회원 가입때 사용*/
 public class MemberDTO {
     private String userId;
     private String loginId;
     private String userNm;
     private String nickNm;
-    private String phoneno;
-    private String userPw;
+
+    private String phoneNo;
+    private String loginPw;
 
     private String roles;
+
+    /*Entity -> Dto*/
+    public MemberDTO(Member member) {
+        this.userId = member.getUserId();
+        this.loginId = member.getLoginId();
+        this.userNm = member.getUserNm();
+        this.nickNm = member.getNickNm();
+        this.phoneNo = member.getPhoneno();
+        this.loginPw = member.getLoginPw();
+        //this.roles = member.getRoles();
+    }
+
+/*    public static MemberDTO of(Member member){
+        return MemberDTO.builder()
+                .userId(USERID)
+                .loginId(LOGINID)
+                .userNm(USERNM)
+                .nickNm(NICKNM)
+                .phoneno(PHONENO)
+                .roles(Collections.singletonList("ROLE_USER"))
+                .build();
+    }*/
 
     public String getUserId() {
         return userId;
@@ -42,20 +70,20 @@ public class MemberDTO {
         this.nickNm = nickNm;
     }
 
-    public String getPhoneno() {
-        return phoneno;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setPhoneno(String phoneno) {
-        this.phoneno = phoneno;
+    public void setPhoneNo(String phoneno) {
+        this.phoneNo = phoneno;
     }
 
-    public String getUserPw() {
-        return userPw;
+    public String getLoginPw() {
+        return loginPw;
     }
 
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
+    public void setUserPw(String LoginPw) {
+        this.loginPw = loginPw;
     }
 
 

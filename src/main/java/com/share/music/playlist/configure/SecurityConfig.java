@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()// 요청에 대한 사용권한 체크
 
                 //해당 URL로 요청시 설정
-                .antMatchers("/test").authenticated()
+                .antMatchers("/api/login").authenticated()
 
                 //권한확인, 각 권한에 따른 URL 경로를 나눌 수 있음
                 /*

@@ -1,14 +1,17 @@
 package com.share.music.playlist.common;
 
 import com.share.music.playlist.common.dto.ApiResult;
+import com.share.music.playlist.error.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -21,7 +24,8 @@ public class GeneralExceptionAdvice {
     return ApiResult.error(throwable, status);
   }
 
-  @ExceptionHandler(NoHandlerFoundException.class)
+  @ExceptionHandler({NoHandlerFoundException.class, NotFoundException.class})
+  @ResponseStatus(HttpStatus.NOT_FOUND)
   public ApiResult<?> handleNotFoundException(Exception e) {
     return newResponse(e, HttpStatus.NOT_FOUND);
   }
@@ -29,8 +33,10 @@ public class GeneralExceptionAdvice {
   @ExceptionHandler({
     IllegalStateException.class, IllegalArgumentException.class,
     TypeMismatchException.class, HttpMessageNotReadableException.class,
-    MissingServletRequestParameterException.class, MultipartException.class
+    MissingServletRequestParameterException.class, MultipartException.class,
+    MethodArgumentNotValidException.class
   })
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ApiResult<?> handleBadRequestException(Exception e) {
     log.debug("Bad request exception occurred: {}", e.getMessage(), e);
     return newResponse(e, HttpStatus.BAD_REQUEST);

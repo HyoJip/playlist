@@ -1,30 +1,35 @@
 package com.share.music.playlist.room.domain;
 
-import com.share.music.playlist.login.domain.Member;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
-@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 @Table(name = "ROOMS")
 public class Room {
 
   @Id
   @GeneratedValue
   @Column(name = "ROOM_ID")
+  @EqualsAndHashCode.Include
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ROOM_MASTER_ID")
-  private Member owner;
+  @Column(name = "ROOM_MASTER_ID")
+  private String ownerId;
+
+  @OneToMany(mappedBy = "room")
+  private List<Entrance> entrance = new ArrayList<>();
+
+  // TODO 룸 카테고리
 
   @Column(name = "NUMBER_LIMIT")
   private int limit;
@@ -36,14 +41,15 @@ public class Room {
   private String comment;
 
   @Builder
-  public Room(Long id, Member owner, int limit, String title, String comment) {
-    checkArgument(owner != null, "owner must be provided.");
+  public Room(Long id, String ownerId, int limit, String title, String comment) {
+    checkArgument(StringUtils.isNotBlank(ownerId), "ownerId must be provided.");
     checkArgument(StringUtils.isNotBlank(title), "title must be provided.");
 
     this.id = id;
-    this.owner = owner;
+    this.ownerId = ownerId;
     this.limit = limit;
     this.title = title;
     this.comment = comment;
   }
 }
+

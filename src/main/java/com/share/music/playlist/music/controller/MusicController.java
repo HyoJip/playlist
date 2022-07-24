@@ -1,6 +1,7 @@
 package com.share.music.playlist.music.controller;
 
 import com.share.music.playlist.common.dto.ApiResult;
+import com.share.music.playlist.music.domain.Music;
 import com.share.music.playlist.music.service.MusicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,10 +17,16 @@ public class MusicController {
 
     private final MusicService musicService;
 
-    @GetMapping
-    public ApiResult<Page<MusicDto>> findMusicList(Pageable pageable) {
+    @GetMapping("/songs")
+    public ApiResult<Page<MusicDTO>> findAllMusic(Pageable pageable) {
         return ApiResult.ok(
-                musicService.findAll(pageable).map(MusicDto::of)
+                musicService.findAll(pageable).map(MusicDTO::of)
+        );
+    }
+    @GetMapping("/{id:\\d+}")
+    public ApiResult<MusicDTO> findMusic(Long musicId) {
+        return ApiResult.ok(
+                MusicDTO.of(musicService.findById(musicId))
         );
     }
 }

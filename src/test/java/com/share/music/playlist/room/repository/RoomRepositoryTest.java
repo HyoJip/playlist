@@ -1,6 +1,5 @@
 package com.share.music.playlist.room.repository;
 
-import com.share.music.playlist.login.domain.Member;
 import com.share.music.playlist.room.domain.Room;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ class RoomRepositoryTest {
     Room room = Room.builder()
       .id(1L)
       .title("bbbic")
-      .owner(new Member())
+      .ownerId("1")
       .build();
 
     roomRepository.save(room);

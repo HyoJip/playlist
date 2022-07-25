@@ -19,6 +19,9 @@ public class PlayListController {
     @GetMapping("/{id:\\d}")
     public ApiResult<Page<PlayListResponseDTO>> findPlaylist(@PathVariable long id){
         return ApiResult.ok(playListService.findByRoomId(id).map(PlayListResponseDTO::of));
+        //주석
+        //테스트테스트테스테
+        //테스형
     }
 
 }

@@ -34,5 +34,6 @@ public class PlayList implements Serializable {
         this.room = room;
         this.musicSn = musicSn;
     }
+    //커밋용
 
 }

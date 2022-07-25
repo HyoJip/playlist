@@ -1,9 +1,11 @@
 package com.share.music.playlist.common.dto;
 
+import lombok.Getter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class ApiError<T> {
 
   private final String message;

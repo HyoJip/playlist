@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlayListRepository extends JpaRepository<PlayList, Long> {
-    public Page<PlayList> findByRoomId(Pageable pageable, Long id);
-
+    Page<PlayList> findAllByRoomId(Long id);
 }

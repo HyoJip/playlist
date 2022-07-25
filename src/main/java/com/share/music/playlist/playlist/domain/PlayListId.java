@@ -15,4 +15,5 @@ import java.io.Serializable;
 public class PlayListId implements Serializable {
     private Room room;
     private Music music;
+    private int musicSn;
 }

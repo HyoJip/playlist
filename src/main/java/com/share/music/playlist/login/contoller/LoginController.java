@@ -27,6 +27,8 @@ public class LoginController {
     final String NICKNM = "야니";
     final String PHONENO = "010-0000-0000";
 
+    //test 22.07.25
+
     Member member = Member.builder()
             .userId(USERID)
             .loginId(LOGINID)

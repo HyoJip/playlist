@@ -17,16 +17,14 @@ class RoomRepositoryTest {
   RoomRepository roomRepository;
 
   @Test
-  @DisplayName("JPA 임시 테스트")
+  @DisplayName("방을 생성할때 자동으로 ID를 만든다.")
   void jpaTest() {
     Room room = Room.builder()
-      .id(1L)
       .title("bbbic")
       .ownerId("1")
       .build();
 
-    roomRepository.save(room);
-    Room roomInDB = roomRepository.findById(1L).get();
-    assertThat(room.getTitle()).isEqualTo(roomInDB.getTitle());
+    Room roomInDB = roomRepository.save(room);
+    assertThat(roomInDB.getId()).isNotNull();
   }
 }

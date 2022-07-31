@@ -1,5 +1,7 @@
 package com.share.music.playlist.room.controller;
 
+import com.share.music.playlist.login.domain.Member;
+import com.share.music.playlist.login.service.LoginService;
 import com.share.music.playlist.room.RoomTestUtil;
 import com.share.music.playlist.room.domain.Room;
 import com.share.music.playlist.room.service.RoomService;
@@ -38,6 +40,9 @@ class RoomControllerTest {
   @MockBean
   RoomService roomService;
 
+  @MockBean
+  LoginService memberService;
+
   @Test
   @DisplayName("[findAll] ApiResult<Page<RoomDTO>>> 형태로 역직렬화한다.")
   void findAll_whenRoomIsOne_returnOne() throws Exception {
@@ -57,12 +62,33 @@ class RoomControllerTest {
   void find_whenUrlMatchesIdPattern_extractId() throws Exception {
     Room room = RoomTestUtil.createRooms(1).get(0);
     given(roomService.find(1L)).willReturn(room);
+    given(memberService.findByUserId(room.getOwnerId())).willReturn(new Member());
 
     mockMvc.perform(get("/api/rooms/1").contentType(MediaType.APPLICATION_JSON))
-//      .andDo(print())
+      .andDo(print())
       .andExpect(jsonPath("$.success").value(true))
-      .andExpect(jsonPath("$.response.id").value(room.getId()))
-      .andExpect(jsonPath("$.response.title").value(room.getTitle()));
+      .andExpect(jsonPath("$.response.id").value(room.getId()));
+  }
+
+  @Test
+  @DisplayName("[find] 유효한 요청은, 방+방장 정보를 반환한다.")
+  void find_whenRequestIsValid_returnRoomDto() throws Exception {
+    Room room = RoomTestUtil.createRooms(1).get(0);
+    Member owner = Member.builder()
+      .userId("Mr.hong")
+      .userNm("홍길동")
+      .nickNm("지존도적")
+      .build();
+    given(roomService.find(1L)).willReturn(room);
+    given(memberService.findByUserId(room.getOwnerId())).willReturn(owner);
+
+    mockMvc.perform(get("/api/rooms/1").contentType(MediaType.APPLICATION_JSON))
+      .andDo(print())
+      .andExpect(jsonPath("$.success").value(true))
+      .andExpect(jsonPath("$.response.title").value(room.getTitle()))
+      .andExpect(jsonPath("$.response.member.userId").value(owner.getUserId()))
+      .andExpect(jsonPath("$.response.member.userNm").value(owner.getUserNm()))
+      .andExpect(jsonPath("$.response.member.nickNm").value(owner.getNickNm()));
   }
 
   @Test

@@ -41,9 +41,10 @@ public class ServiceConfigure {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
       }
     };
-    builder.serializationInclusion(JsonInclude.Include.NON_NULL);
-    builder.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    builder.modulesToInstall(jtm);
+    builder
+      .serializationInclusion(JsonInclude.Include.NON_NULL)
+      .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+      .modulesToInstall(jtm);
     return builder;
   }
 

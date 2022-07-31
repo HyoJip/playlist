@@ -2,6 +2,7 @@ package com.share.music.playlist.room.controller;
 
 import com.share.music.playlist.common.dto.ApiResult;
 import com.share.music.playlist.login.domain.Member;
+import com.share.music.playlist.login.service.LoginService;
 import com.share.music.playlist.room.domain.Room;
 import com.share.music.playlist.room.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +26,7 @@ import javax.validation.constraints.Min;
 public class RoomController {
 
   private final RoomService roomService;
+  private final LoginService memberService;
 
   @Operation(summary = "단건 방 조회", description = "방 ID를 가지고 해당하는 방 정보를 조회한다.")
   @ApiResponses(value = {
@@ -36,8 +38,10 @@ public class RoomController {
   public ApiResult<RoomDTO> findRoom(
     @Parameter(description = "조회할 방 ID", required = true)
     @PathVariable @Min(0) @Max(Long.MAX_VALUE) Long id) {
+    Room room = roomService.find(id);
+    Member member = memberService.findByUserId(room.getOwnerId());
     return ApiResult.ok(
-      RoomDTO.of(roomService.find(id))
+      RoomDTO.of(room, member)
     );
   }
 

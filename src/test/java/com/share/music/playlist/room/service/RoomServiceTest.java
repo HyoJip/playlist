@@ -59,7 +59,6 @@ class RoomServiceTest {
       .hasMessage("Could not found 'Room' with query values (1)")
       .isInstanceOf(NotFoundException.class);
   }
-
   @Test
   @DisplayName("[create] 유효한 방 엔티티일 경우, 생성 후 ID를 반환한다.")
   void find_whenRoomIsValid_returnCreatedRoomId() {

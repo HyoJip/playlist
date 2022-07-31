@@ -46,8 +46,8 @@ public class RoomDTO {
 
 
   public static RoomDTO of(Room room) {
-    MemberDTO memberDTO = new MemberDTO();
-    memberDTO.setUserId(room.getOwnerId());
+    Member member = Member.builder().userId(room.getOwnerId()).build();
+    MemberDTO memberDTO = new MemberDTO(member);
 
     return RoomDTO.builder()
       .id(room.getId())
@@ -63,10 +63,7 @@ public class RoomDTO {
   }
 
   public static RoomDTO of(Room room, Member member) {
-    MemberDTO memberDTO = new MemberDTO();
-    memberDTO.setUserId(member.getUserId());
-    memberDTO.setUserNm(member.getUserNm());
-    memberDTO.setNickNm(member.getNickNm());
+    MemberDTO memberDTO = new MemberDTO(member);
 
     RoomDTO roomDTO = RoomDTO.of(room);
     roomDTO.setMember(memberDTO);

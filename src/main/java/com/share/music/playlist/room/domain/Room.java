@@ -4,9 +4,7 @@ import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -27,12 +25,13 @@ public class Room {
   private String ownerId;
 
   @OneToMany(mappedBy = "room")
-  private List<Entrance> entrance = new ArrayList<>();
+  private List<Entrance> entrances = new ArrayList<>();
 
-  // TODO 룸 카테고리
+  @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<CategoryTag> categoryTags = new HashSet<>();
 
   @Column(name = "NUMBER_LIMIT")
-  private int limit;
+  private Integer limit;
 
   @Column(name = "ROOM_TITLE")
   private String title;
@@ -41,15 +40,19 @@ public class Room {
   private String comment;
 
   @Builder
-  public Room(Long id, String ownerId, int limit, String title, String comment) {
+  public Room(Long id, String ownerId, Integer limit, String title, String comment) {
+    limit = Objects.requireNonNullElse(limit, 1);
+
     checkArgument(StringUtils.isNotBlank(ownerId), "ownerId must be provided.");
     checkArgument(StringUtils.isNotBlank(title), "title must be provided.");
+    checkArgument(limit > 0, "limit must be positive.");
 
     this.id = id;
     this.ownerId = ownerId;
     this.limit = limit;
     this.title = title;
     this.comment = comment;
+
   }
 }
 

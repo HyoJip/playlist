@@ -3,8 +3,10 @@ package com.share.music.playlist.login.contoller;
 import com.share.music.playlist.common.JwtTokenProvider;
 import com.share.music.playlist.login.domain.Member;
 import com.share.music.playlist.login.repository.LoginRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NamedQuery;
@@ -39,6 +41,12 @@ public class LoginController {
             .build();
 
 
+    //test
+    @GetMapping("hello")
+    public ResponseEntity<String> hello(){
+        return ResponseEntity.ok("hello");
+    }
+
     /**
      *로그인
      *
@@ -49,9 +57,9 @@ public class LoginController {
    // public ApiResult<MemberDTO> mainLogin(@RequestBody LoginDTO loginDTO){
     public String mainLogin(@RequestBody Map<String, String> user){
 
-        log.info("user id = {}",user.get("id"));
+      /*  log.info("user id = {}",user.get("id"));
         Member member = loginRepository.findById(user.get("id"))
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));*/
 
 
         //사용자의 아이디와 비번확인하는 로직필요
@@ -60,7 +68,8 @@ public class LoginController {
 
         );*/
 
-        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+        //return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+        return "";
 
 
     }

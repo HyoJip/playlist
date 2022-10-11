@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
- * Spring Security 권한 설정
+ * Spring Security 권한 설정 클래스
  */
 @EnableWebSecurity //기본적인 web보안을 활성화
 @EnableGlobalMethodSecurity(prePostEnabled = true)

@@ -48,6 +48,7 @@ logging:
 
 
 jwt:
-  server:
-    port: 8080
-  secret: jwtsecretkey
+  header: Authorization
+  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 함.
+  secret: cGxheUxpc3QtaHlvamlwLWJhY2tqb29uLWppeWVvbi1oeXVuamktand0LWtleS1wbGF5TGlzdC1oeW9qaXAtYmFja2pvb24taml5ZW9uLWh5dW5qaS1qd3Qta2V5
+  token-validity-in-seconds: 600 # 10 min

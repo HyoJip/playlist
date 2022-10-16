@@ -21,8 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -106,13 +105,14 @@ class RoomControllerTest {
     given(roomService.create(any(Room.class)))
       .willReturn(1L);
 
-    String json = """
-        {
-          "title": "",
-          "limit":  5,
-          "comment": "테스트 방입니다."
-        }
-      """;
+    String json = "";
+//        """
+//        {
+//          "title": "",
+//          "limit":  5,
+//          "comment": "테스트 방입니다."
+//        }
+//      """;
     mockMvc.perform(post("/api/rooms")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json)
@@ -129,13 +129,14 @@ class RoomControllerTest {
     given(roomService.create(any(Room.class)))
       .willReturn(1L);
 
-    String json = """
-        {
-          "title": "test_title",
-          "limit":  -1,
-          "comment": "테스트 방입니다."
-        }
-      """;
+    String json = "";
+//        """
+//        {
+//          "title": "test_title",
+//          "limit":  -1,
+//          "comment": "테스트 방입니다."
+//        }
+//      """;
     mockMvc.perform(post("/api/rooms")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json)
@@ -152,13 +153,14 @@ class RoomControllerTest {
     given(roomService.create(any(Room.class)))
       .willReturn(1L);
 
-    String json = """
-        {
-          "title": "test_title",
-          "limit":  501,
-          "comment": "테스트 방입니다."
-        }
-      """;
+    String json = "";
+//        """
+//        {
+//          "title": "test_title",
+//          "limit":  501,
+//          "comment": "테스트 방입니다."
+//        }
+//      """;
     mockMvc.perform(post("/api/rooms")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json)
@@ -172,25 +174,78 @@ class RoomControllerTest {
   @Test
   @DisplayName("[createRoom] 유효한 방 생성 요청일 경우, 생성된 방 ID를 반환한다.")
   void createRoom_whenRequestIsValid_returnCreatedRoomId() throws Exception {
-    long createdRoomId = 1L;
-    given(roomService.create(any(Room.class)))
-      .willReturn(createdRoomId);
 
-    String json = """
-        {
-          "title": "test_title",
-          "limit":  250,
-          "comment": "테스트 방입니다."
-        }
-      """;
+    given(roomService.create(any(Room.class))).willReturn(1L);
+
+    String json = "";
+//        """
+//        {
+//          "title": "test_title",
+//          "limit":  250,
+//          "comment": "테스트 방입니다."
+//        }
+//      """;
     mockMvc.perform(post("/api/rooms")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json)
       )
-//      .andDo(print())
+      .andDo(print())
       .andExpect(jsonPath("$.success").value(true))
       .andExpect(jsonPath("$.error").isEmpty())
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.response").value(createdRoomId));
+      .andExpect(jsonPath("$.response").value(1L));
+  }
+
+  @Test
+  @DisplayName("[updateRoom] 유효한 방 변경 요청일 경우, 변경된 방 정보를 반환한다.")
+  void updateRoom_whenRequestIsValid_returnUpdatedRoom() throws Exception {
+    Room updatedRoom = Room.builder()
+      .id(1L)
+      .ownerId("1")
+      .title("updated_title")
+      .limit(50)
+      .comment("수정된 테스트 방입니다.")
+      .build();
+    given(roomService.update(any(Long.class), any(String.class), any(int.class), any(String.class)))
+      .willReturn(updatedRoom);
+
+    String json = "";
+//        """
+//        {
+//          "title": "updated_title",
+//          "limit":  50,
+//          "comment": "수정된 테스트 방입니다."
+//        }
+//      """;
+    mockMvc.perform(put("/api/rooms/1")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json)
+      )
+      .andDo(print())
+      .andExpect(jsonPath("$.success").value(true))
+      .andExpect(jsonPath("$.error").isEmpty())
+      .andExpect(status().isOk())
+      .andExpect(jsonPath("$.response.title").value("updated_title"));
+  }
+
+  @Test
+  @DisplayName("[updateRoom] url에 id가 없는 경우, 400을 반환한다.")
+  void updateRoom_whenIdIsNotProvided_throwIllegalArgumentException() throws Exception {
+
+    String json = "";
+//        """
+//        {
+//          "title": "updated_title",
+//          "limit":  50,
+//          "comment": "수정된 테스트 방입니다."
+//        }
+//      """;
+    mockMvc.perform(put("/api/rooms/")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json)
+      )
+      .andDo(print())
+      .andExpect(jsonPath("$.error").isNotEmpty())
+      .andExpect(status().is4xxClientError());
   }
 }

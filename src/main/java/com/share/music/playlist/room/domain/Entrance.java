@@ -24,7 +24,7 @@ public class Entrance {
 
   @Embeddable
   @EqualsAndHashCode
-  private class EntranceId implements Serializable {
+  public class EntranceId implements Serializable {
 
     private Long roomId; // @MapsId
 

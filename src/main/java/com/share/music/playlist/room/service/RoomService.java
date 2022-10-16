@@ -34,4 +34,20 @@ public class RoomService {
     return roomInDB.getId();
   }
 
+  @Transactional
+  public Room update(Long id, String title, Integer limit, String comment) {
+    Room room = roomRepository.findById(id)
+      .orElseThrow(() -> new NotFoundException(Room.class, id));
+
+    if (title != null) {
+      room.changeTitle(title);
+    }
+    if (limit != null) {
+      room.changeLimit(limit);
+    }
+    if (comment != null) {
+      room.changeComment(comment);
+    }
+    return room;
+  }
 }

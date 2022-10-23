@@ -3,6 +3,7 @@ package com.share.music.playlist.room.service;
 import com.share.music.playlist.error.NotFoundException;
 import com.share.music.playlist.login.service.LoginService;
 import com.share.music.playlist.room.RoomTestUtil;
+import com.share.music.playlist.room.controller.RoomDTO;
 import com.share.music.playlist.room.domain.Room;
 import com.share.music.playlist.room.repository.RoomRepository;
 import com.share.music.playlist.util.MessageUtils;
@@ -59,9 +60,10 @@ class RoomServiceTest {
       .hasMessage("Could not found 'Room' with query values (1)")
       .isInstanceOf(NotFoundException.class);
   }
+
   @Test
   @DisplayName("[create] 유효한 방 엔티티일 경우, 생성 후 ID를 반환한다.")
-  void find_whenRoomIsValid_returnCreatedRoomId() {
+  void create_whenRoomIsValid_returnCreatedRoomId() {
     Room room = RoomTestUtil.createRooms(1).get(0);
     given(roomRepository.save(any(Room.class))).willReturn(room);
 
@@ -69,4 +71,26 @@ class RoomServiceTest {
 
     assertThat(roomId).isEqualTo(room.getId());
   }
+
+  @Test
+  @DisplayName("[find] 해당 id의 방이 있을 경우, 방 정보를 반환한다.")
+  void find_whenRoomExists_returnRoomAndOwner() {
+    Room room = RoomTestUtil.createRooms(1).get(0);
+    given(roomRepository.findById(anyLong())).willReturn(Optional.of(room));
+
+    Room roomInDB = roomService.find(1L);
+
+    assertThat(roomInDB.getId()).isEqualTo(1L);
+  }
+
+//  @Test
+//  @DisplayName("[update] 로그인한 회원의 방일 경우, 방 정보를 수정한다.")
+//  void update_whenRoomOwnerIsLoggedUser_updateRoom() {
+//    Room room = RoomTestUtil.createRooms(1).get(0); // ownerId == 1
+//    given(roomRepository.findById(anyLong())).willReturn(Optional.of(room));
+//
+//    Room updated = roomService.update(2L, "타이틀", 50, "설명");
+//
+//    assertThat(updated.getId()).isEqualTo(1L);
+//  }
 }

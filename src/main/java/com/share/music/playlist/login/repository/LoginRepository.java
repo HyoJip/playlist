@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface LoginRepository extends JpaRepository<Member, String> {
 
+
+
 }

@@ -2,16 +2,18 @@ package com.share.music.playlist.room.domain;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "ROOM_USER")
+@Table(name = "ROOM_MUSIC_CATEGORY")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Entrance {
+@Getter
+public class CategoryTag {
 
   @MapsId("roomId")
   @ManyToOne(fetch = FetchType.LAZY)
@@ -20,16 +22,15 @@ public class Entrance {
 
   @EmbeddedId
   @EqualsAndHashCode.Include
-  private EntranceId id;
+  private CategoryTagId id;
 
   @Embeddable
   @EqualsAndHashCode
-  public class EntranceId implements Serializable {
+  class CategoryTagId implements Serializable {
 
-    private Long roomId; // @MapsId
+    @Column(name = "CATEGORY_ID")
+    private Long categoryId;
 
-    @Column(name = "USER_ID")
-    private String userId;
+    private Long roomId;
   }
-
 }

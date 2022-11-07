@@ -1,25 +1,28 @@
 package com.share.music.playlist.music.controller;
 
 import com.share.music.playlist.music.domain.Music;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MusicDTO {
 
-    private final Long id;
-    private String name;
-
-    @Builder
-    private MusicDTO(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private String musicId;
+    private String musicNm;
+    private String musicArtist;
+    private String albumNm;
+    private String playTime;
 
     public static MusicDTO of(Music music) {
         return MusicDTO.builder()
-                .id(music.getId())
-                .name(music.getName())
+                .musicId(music.getMusicId())
+                .musicNm(music.getMusicNm())
+                .musicArtist(music.getMusicArtist())
+                .albumNm(music.getAlbumNm())
+                .playTime(music.getPlayTime())
                 .build();
     }
 }

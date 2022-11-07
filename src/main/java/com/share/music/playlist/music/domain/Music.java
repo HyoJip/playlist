@@ -16,10 +16,10 @@ public class Music {
     @Id
     @GeneratedValue
     @Column(name = "MUSIC_ID")
-    private Long id;
+    private String musicId;
 
     @Column(name = "MUSIC_NM")
-    private String name;
+    private String musicNm;
 
     @Column(name = "MUSIC_ARTIST")
     private String musicArtist;
@@ -31,9 +31,9 @@ public class Music {
     private String playTime;
 
     @Builder
-    public Music(Long id, String name, String musicArtist, String albumNm, String playTime) {
-        this.id = id;
-        this.name = name;
+    public Music(String id, String name, String musicArtist, String albumNm, String playTime) {
+        this.musicId = id;
+        this.musicNm = name;
         this.musicArtist = musicArtist;
         this.albumNm = albumNm;
         this.playTime = playTime;

@@ -21,7 +21,7 @@ public class MusicService {
     }
 
     @Transactional(readOnly = true)
-    public Music findById(Long musicId) {
+    public Music findById(String musicId) {
         return musicRepository.findById(musicId)
                 .orElseThrow(() -> new NotFoundException(Music.class, musicId));
     }

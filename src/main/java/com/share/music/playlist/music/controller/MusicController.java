@@ -33,10 +33,18 @@ public class MusicController {
                 musicService.findAll(pageable).map(MusicDTO::of)
         );
     }
-    @GetMapping("/{id:\\d+}")
+    /*
+    @GetMapping("/songs")
+    public ApiResult<Page<MusicDTO>> findAllMusic(@RequestParam String musicId, Pageable pageable) {
+        return ApiResult.ok(
+                musicService.findAll(pageable).map(MusicDTO::of)
+        );
+    }*/
+
+    @GetMapping("/{musicId}")
     public ApiResult<MusicDTO> findMusic(
             @Parameter(description = "조회할 음악 ID", required = true)
-            @PathVariable @Min(0) @Max(Long.MAX_VALUE) Long musicId) {
+            @PathVariable @Min(0) @Max(Long.MAX_VALUE) String musicId) {
         return ApiResult.ok(
                 MusicDTO.of(musicService.findById(musicId))
         );
@@ -48,4 +56,5 @@ public class MusicController {
                 musicService.findByMusicNmAndMusicArtist(music, pageable).map(MusicDTO::of)
         );
     }
+
 }

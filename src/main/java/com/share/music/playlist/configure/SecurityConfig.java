@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/login/*").permitAll()
                 //.antMatchers("/api/login/join").permitAll()
                 .anyRequest().authenticated()
 
